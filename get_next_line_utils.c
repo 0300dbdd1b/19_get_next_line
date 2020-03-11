@@ -6,7 +6,7 @@
 /*   By: naddino <naddino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 05:51:17 by naddino           #+#    #+#             */
-/*   Updated: 2020/03/11 14:47:57 by naddino          ###   ########.fr       */
+/*   Updated: 2020/03/11 16:35:11 by naddino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,22 @@ char	*ft_strdup(const char *s1)
 	return (dest);
 }
 
-void		*ft_memset(void *b, int c, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned char	*str;
+	char	*output;
+	size_t	s_len;
 
-	str = (unsigned char *)b;
-	while (len--)
-		*str++ = (unsigned char)c;
-	return (b);
+	if (!s)
+		return (0);
+	s_len = ft_strlen(s);
+	if (s_len < start)
+		s_len = 0;
+	else
+		s_len = s_len - start;
+	if (s_len < len)
+		len = s_len;
+	if (!(output = malloc(sizeof(*s) * (len + 1)))
+			|| !ft_strlcpy(output, s + start, len + 1))
+		return (0);
+	return (output);
 }

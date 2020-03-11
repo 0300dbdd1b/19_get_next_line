@@ -6,7 +6,7 @@
 /*   By: naddino <naddino@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 05:51:13 by naddino           #+#    #+#             */
-/*   Updated: 2020/03/11 15:20:39 by naddino          ###   ########.fr       */
+/*   Updated: 2020/03/11 18:00:23 by naddino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,64 +14,71 @@
 
 char *get_buff(int fd) /* lis BUFFER_SIZE characteres et les stockes dans une string */
 {
-    size_t size;
+    int size;
     static char buff[BUFFER_SIZE + 1];
+    char *output;
 
     size = read(fd, buff, BUFFER_SIZE);
+    if (size == 0)
+        return (0);
     buff[size + 1] = '\0';
-    return (buff);
+    output = ft_strdup(buff);
+    return (output);
 }
 
 char *buffer_alloc(int fd, char *buffer, int count) /* Realloue et cat buffer */
 {
-    char *tmp;
-
-    printf("%s\n", buffer);
-    tmp = buffer;
-    if (count == 2)
-        buffer = malloc(sizeof(char) * ((BUFFER_SIZE * count) + 1));
-    free(buffer);
-    buffer = malloc(sizeof(char) * ((BUFFER_SIZE * count) + 1));
-    ft_strlcpy(buffer, tmp, BUFFER_SIZE);
-    ft_strlcat(buffer, get_buff(fd), BUFFER_SIZE);
-    count++;
-
-    return (buffer);
+   char *tmp;
+   tmp = buffer;
+   free(buffer);
+   buffer = malloc(sizeof(char) * BUFFER_SIZE * count + 1);
+   ft_strlcpy(buffer, tmp, BUFFER_SIZE * count + 1);
+   ft_strlcat(buffer, get_buff(fd), BUFFER_SIZE * count + 1);
+   return (buffer);
 }
 
 char *get_line(int fd)
 {
     size_t x;
     char *buffer;
-    static int count;
+    char *output;
+    int count;
 
     count = 2;
-    x = 2;
+    x = 0;
     buffer = get_buff(fd);
-    while (buffer[x] != '\n')
+    while (buffer[x++] != '\n')
     {
         if (buffer[x] == '\0' || !buffer[x])
-        {
-            printf("KEY\n");
-            buffer_alloc(fd, buffer, count++);
-        }
-        x++;
+            buffer = buffer_alloc(fd, buffer, count++);
     }
-    printf("YES\n");
-    return (buffer);
+    output = malloc(sizeof(char) * x + 1);
+    ft_strlcpy(output, buffer, x);
+    printf("Output = %s\n", output);
+    return (output);
 }
 
 int get_next_line(int fd, char **line)
 {
+    size_t x;
+    char *output;
+
+    x  = 0;
     if (BUFFER_SIZE <= 0)
         return (-1);
-    printf("%s\n", get_line(fd)); 
+    output = get_line(fd);
+
 }
 
 int main()
 {
     char **ok;
     int fd = open("fichier", O_RDONLY);
-    get_next_line(fd, ok);
+
+    while (get_next_line(fd, ok) != 0)
+    {
+       // write(1, "\n", 1);  
+    }
+
 }
 
