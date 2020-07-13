@@ -17,19 +17,26 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# ifndef BUFFER_SIZE
-#   define BUFFER_SIZE 6
+# ifndef   BUFFER_SIZE
+#   define BUFFER_SIZE 15
 # endif
 
 int get_next_line(int fd, char **line);
-char *get_buff(int fd);
-char *get_line(int fd);
+char *get_buff(const int fd);
+char **get_line(const int fd);
+char *get_endl(const int fd, const int i);
+int checkRet(const char *str);
 
 size_t		ft_strlen(const char *s);
-size_t	ft_strlcat(char *dest, const char *src, size_t size);
+size_t	    ft_strlcat(char *dest, const char *src, size_t size);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 void		*ft_memcpy(void *dst, const void *src, size_t n);
-char	*ft_strdup(const char *s1);
+char	    *ft_strdup(const char *s1);
 void		*ft_memset(void *b, int c, size_t len);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	    *ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+static char	*ft_strndup(char *src, int n);
+static int	word_c(const char *str, char c);
+char		**ft_split(char const *s, char c);
+
 #endif
