@@ -142,7 +142,7 @@ static char	*ft_strndup(char *src, int n)
 		copy[i] = src[i];
 		i++;
 	}
-	copy[i] = '\0';
+	copy[i] = '\0'; 
 	return (copy);
 }
 
@@ -201,5 +201,6 @@ char		**ft_split(char const *s, char c)
 			i++;
 	}
 	tab[k] = 0;
+
 	return (tab);
 }
