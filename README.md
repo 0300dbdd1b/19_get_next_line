@@ -5,7 +5,7 @@
 
 "The aim of this project is to make you code a function that returns a line ending with a newline, read from a file descriptor."
 
- - [subject here(FR)]https://github.com/Marcaday/19_Subjects/blob/master/get_next_line_FR.pdf
+ - [subject here]https://github.com/Marcaday/19_Subjects/blob/master/get_next_line_FR.pdf - FR
 ## Status
 
 ### Success
